@@ -45,23 +45,75 @@ Anomaly detection methods can be broadly classified into the following categorie
 
 2. Rule-Based Approaches: These methods entail establishing explicit rules that delineate normal behavior. Any behavior contravening these rules is flagged as an anomaly. While this method is straightforward, it necessitates extensive domain knowledge to formulate accurate rules.
 
-### Part 2: Preparing for Automation Azure Automation Account Setup
+### Part 2: Preparing for Automation
+
+- Establish Azure Logic App/Configuration.
+![logic_app](Images/logic_app.png)
+![logic_app2](Images/logic_app2.png)
+
+- Creating Storage Account.
+![logic_app3](Images/logic_app3.png)
+![logic_app4](Images/logic_app4.png)
+![logic_app5](Images/logic_app5.png)
+
+- Generate a workflow to subsequently set up triggers within the designer.
+![logic_design](Images/logic_design.png)
+![logic_design2](Images/logic_design2.png)
+
 ### Part 3: Implementing Anomaly Detection
+
+In our system logs, if there are more than 5 instances of failed login attempts within a short timeframe, it should be marked as an anomaly. The application from the previous assignment has been modified to ensure a more consistent logging of "Failed Login" events. The system checks for these events every 30 minutes, a frequency that can be adjusted based on your preference. When triggered, an Azure monitor action runs a query to count the occurrences of failed logins within the last hour. The workflow then checks if this count exceeds 10. If it does, the system executes another query to retrieve details about the most recent failed login and sends this information to the administrator.
+
+- Link to Azure Log Analytics: Utilize either the Azure Logic App to establish a connection with the Azure Log Analytics workspace created in Assignment 1.
+![diagnostic_app](Images/diagnostic_app.png)
+
 ### Part 4: Integrating Cloud Security Best Practices
 
----
+### Maintaining Anomaly Detection Effectiveness
 
-1. Kubernetes Application Setup: This stage involved deploying an application within a Kubernetes cluster using a `service.yaml` and `deployment.yaml` file to execute a Docker image. This process ensures the proper containerization and hosting of the application within the Kubernetes environment.
-2. Google SSO Implementation: We incorporated Google SSO to establish an authentication mechanism, allowing users to log in using their Gmail accounts, thereby bolstering security and user management.
-3. Syslog Server Setup: A Syslog server was configured, and the application was configured to transmit logs to this server. This centralized logging and monitoring setup offers insights into application behavior and potential security incidents.
-4. Integration with Azure Log Analytics: We executed steps to establish a Log Analytics Workspace, connect a virtual machine to Azure via Azure Arc, and create a data collection rule. This facilitates querying of Google SSO App logs within Azure Log Analytics, providing advanced monitoring and analysis capabilities.
-5. Data Visualization using Grafana: Lastly, we installed and configured Grafana on a virtual machine, including tasks such as app registration, permission settings for Log Analytics API, client secret creation, and access control setup. This integration enables Grafana to connect to Azure Log Analytics Workspace and create dashboards for visualizing authentication attempts and other crucial data.
+To ensure the anomaly detection system consistently identifies emerging threats, regular refinement of detection rules and algorithms is crucial. Establish a formal review cadence (e.g., monthly or quarterly) to enhance rules based on the latest threat intelligence and lessons learned from security incidents. Integrate real-time threat intelligence feeds to continuously update rules with the most recent threat indicators.  Furthermore, leverage machine learning algorithms that autonomously adapt, improving accuracy by analyzing detection outcomes (both false positives and negatives). Implement a stringent change management process to test all updates thoroughly in a staging environment prior to production deployment, safeguarding system integrity.
 
-## Steps Performed
+### Documentation, Communication, and Training
 
+Maintain thorough documentation of all detection rule changes, providing accessible logs to relevant stakeholders, including compliance teams. Transparent communication of updates ensures alignment across the organization. Ongoing training for security personnel on AI/ML tools and evolving threat landscapes is essential. This continuous improvement approach bolsters cybersecurity posture and enhances the infrastructure's overall resilience against current and future attacks.
+
+
+## Incident Response Plan
+
+1. Preparation
+- Establish Response Team: Designate a team with clear roles and responsibilities (investigators, communicators, technical specialists).
+- Detection Tools: Continuously monitor systems using automated tools for threat detection and alerts.
+- Communication Plan: Pre-define communication channels and escalation protocols.
+
+2. Identification
+- Alert Verification: Quickly assess alerts to distinguish between false positives and genuine threats.
+- Severity Assessment: Determine the potential impact of a verified incident.
+
+3. Containment
+- Isolate Systems: Prevent the spread of the incident by isolating affected systems or networks.
+- Evidence Preservation: Secure logs and other relevant data for forensic analysis.
+
+4. Eradication
+- Root Cause Analysis: Identify the vulnerability or attack vector that led to the incident.
+- Remediation: Implement corrective actions (patching, credential changes, malware removal).
+
+5. Recovery
+- System Restoration: Restore systems and data to their pre-incident state from secure backups.
+- Vulnerability Remediation: Address the underlying issues that contributed to the incident.
+
+6. Post-Incident Analysis
+- Lessons Learned: Conduct a thorough review to identify areas for improvement in detection, response, and prevention.
+- Update Procedures: Refine the incident response plan and security protocols based on the findings.
+- Training: Provide relevant team members with updated training based on incident analysis.
 
 ## Conclusion
 
+This lab provided hands-on experience with Azure's security and automation tools. We used Azure Logic Apps to automate security monitoring and response, creating scripts to detect anomalies like failed logins and trigger appropriate actions. This reinforced the value of continuous monitoring and automated workflows for maintaining a secure cloud environment.
+
+Key Takeaways:
+- Proactive Security: The lab emphasized the importance of proactive monitoring and automated responses for timely threat detection and mitigation.
+- Least Privilege: We applied the principle of least privilege to minimize risk by granting only essential access rights to accounts.
+- Incident Response: The lab highlighted the need for a well-defined incident response plan to ensure swift and effective action in case of a security breach.
 
 ---
 
