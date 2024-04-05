@@ -67,6 +67,9 @@ In our system logs, if there are more than 5 instances of failed login attempts 
 - Link to Azure Log Analytics: Utilize either the Azure Logic App to establish a connection with the Azure Log Analytics workspace created in Assignment 1.
 ![diagnostic_app](Images/diagnostic_app.png)
 
+- Logic App Workflow made in Logic App Designer:
+![logic_app_workflow](Images/logic_app_workflow.png)
+
 ### Part 4: Integrating Cloud Security Best Practices
 
 ### Maintaining Anomaly Detection Effectiveness
